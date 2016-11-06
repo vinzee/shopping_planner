@@ -24,6 +24,8 @@ $ Goto - http://localhost:3000
 ### Scaffold Generator
 * generator-api - https://github.com/ndelvalle/generator-api
 * generator-mongoose - https://www.npmjs.com/package/generator-mongoose
+* express-mongoose-generator - https://www.npmjs.com/package/express-mongoose-generator
+	Model Generator
 
 
 ```sh
@@ -36,8 +38,6 @@ yo mongoose:schema "product|name:String,type:String"
 	Express App generator
 * What is yeoman ? - http://yeoman.io/learning/index.html
 	Collection of Generators
-* express-mongoose-generator - https://www.npmjs.com/package/express-mongoose-generator
-	Model Generator
 * Grunt - https://scotch.io/tutorials/a-simple-guide-to-getting-started-with-grunt
 	Task Runner
 * Morgan - https://www.npmjs.com/package/morgan

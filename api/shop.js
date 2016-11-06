@@ -5,6 +5,17 @@ var express = require('express'),
     Shop = mongoose.models.Shop,
     api = {};
 
+
+api.shop_types = function (req, res) {
+  Shop.find().distinct('type', function(err, data) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json({data: data});
+    }
+  });
+};
+
 // ALL
 api.shops = function (req, res) {
   Shop.find(function(err, shops) {
@@ -135,6 +146,7 @@ api.deleteShop = function (req, res) {
 
 
 router.get('/shops', api.shops);
+router.get('/shop_types', api.shop_types);
 router.post('/shop', api.addShop);
 
 router.route('/shop/:id')

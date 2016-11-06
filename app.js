@@ -8,18 +8,22 @@ var bodyParser = require('body-parser'); // parses information from POST
 var methodOverride = require('method-override'); // used to manipulate POST
 var morgan = require('morgan');
 
+// models
+var product = require('./models/product');
+var shop = require('./models/shop');
+
+// routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-var product = require('./routes/users');
-var shop = require('./routes/users');
+var products = require('./api/product');
+var shops = require('./api/shop');
 
 var db = require('./db');
 
 var app = express();
 
 // ------------------extras---------------------
-// app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile);
 // app.set('view engine', 'html');
 // ---------------------------------------------
 
@@ -29,7 +33,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-// app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -37,6 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/', products);
+app.use('/', shops);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

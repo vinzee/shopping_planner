@@ -5,6 +5,16 @@ var express = require('express'),
     Product = mongoose.models.Product,
     api = {};
 
+api.product_types = function (req, res) {
+  Product.find().distinct('type', function(err, data) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json({data: data});
+    }
+  });
+};
+
 // ALL
 api.products = function (req, res) {
   Product.find(function(err, products) {
@@ -57,15 +67,15 @@ api.editProduct = function (req, res) {
   Product.findById(id, function (err, product) {
 
 
-  
+
     if(typeof req.body.product["name"] != 'undefined'){
       product["name"] = req.body.product["name"];
     }
-  
+
     if(typeof req.body.product["type"] != 'undefined'){
       product["type"] = req.body.product["type"];
     }
-  
+
 
     return product.save(function (err) {
       if (!err) {
@@ -99,6 +109,7 @@ api.deleteProduct = function (req, res) {
 
 
 router.get('/products', api.products);
+router.get('/product_types', api.product_types);
 router.post('/product', api.addProduct);
 
 router.route('/product/:id')

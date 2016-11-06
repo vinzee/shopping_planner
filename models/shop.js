@@ -5,15 +5,15 @@ var mongoose = require('mongoose'),
 		ObjectId = Schema.ObjectId;
 
 var fields = {
-	name: { type: String },
-	type: { type: String },
-	category: { type: String },
-	subcategory: { type: String },
-	coordinates: { type: Array },
-	city: { type: String },
-	country: { type: String },
+	name: { type: String, required: true },
+	type: { type: String, required: true },
+	category: { type: String, required: true },
+	subcategory: { type: String, required: true },
+	coordinates: { type: [Number], index: '2dsphere', required: true },
+	city: { type: String, required: true },
+	country: { type: String, required: true },
 	address: { type: String },
-	postcode: { type: String },
+	postcode: { type: String, required: true },
 	owner: { type: String },
 	phone: { type: String }
 };
