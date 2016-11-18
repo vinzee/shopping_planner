@@ -21,6 +21,11 @@ $ npm start
 $ Goto - http://localhost:3000
 ```
 
+### One time setup per project
+```
+https://expressjs.com/en/starter/generator.html
+```
+
 ### Scaffold Generator
 * generator-api - https://github.com/ndelvalle/generator-api
 * generator-mongoose - https://www.npmjs.com/package/generator-mongoose
