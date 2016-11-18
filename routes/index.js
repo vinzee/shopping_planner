@@ -9,7 +9,7 @@ var _ = require('underscore-node'),
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Shoping Planner' });
+	res.render('homepage.html', { title: 'Shoping Planner' });
 });
 
 router.get('/get_shortest_path', function(req, res, next) {
