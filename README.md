@@ -45,3 +45,6 @@ yo mongoose:schema "product|name:String,type:String"
 * Dillinger - http://dillinger.io
 	MD file online editor
 * NodeJS REPL - http://stackoverflow.com/questions/14549846/equivalence-of-rails-console-for-node-js
+	Read Eval Print Loop
+* Bluebird - http://bluebirdjs.com/docs/getting-started.html
+	Promises

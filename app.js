@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser'); // parses information from POST
 var methodOverride = require('method-override'); // used to manipulate POST
 var morgan = require('morgan');
+var Promise = require("bluebird");
 
 // models
 var product = require('./models/product');
@@ -21,6 +22,8 @@ var shops = require('./api/shop');
 var db = require('./db');
 
 var app = express();
+
+var helpers = require('./lib/helpers');
 
 // ------------------extras---------------------
 app.engine('html', require('ejs').renderFile);

@@ -1,0 +1,156 @@
+{"type":"Groceries","name":"Cereal"}
+{"type":"Groceries","name":"vegetables"}
+{"type":"Groceries","name":"Potatoes"}
+{"type":"Groceries","name":"Onions"}
+{"type":"Groceries","name":"Vegetable Oil"}
+{"type":"Groceries","name":"Vinegar"}
+{"type":"Groceries","name":"Rice"}
+{"type":"Groceries","name":"Pickles"}
+{"type":"Groceries","name":"Pasta"}
+{"type":"Groceries","name":"Peanut Butter"}
+{"type":"Dairy","name":"Milk"}
+{"type":"Dairy","name":"cheese"}
+{"type":"Dairy","name":"Yogurt"}
+{"type":"Dairy","name":"Butter"}
+{"type":"Dairy","name":"Whipped Cream"}
+{"type":"Dairy","name":"Cottage Cheese"}
+{"type":"Baked Products","name":"Bagels"}
+{"type":"Baked Products","name":"Cake"}
+{"type":"Baked Products","name":"Pita Bread"}
+{"type":"Baked Products","name":"Donuts"}
+{"type":"Baked Products","name":"Buns"}
+{"type":"Baked Products","name":"Fresh Bread"}
+{"type":"Cleaning Products","name":"Air Freshener"}
+{"type":"Cleaning Products","name":"Bathroom cleaner"}
+{"type":"Cleaning Products","name":"Detergent"}
+{"type":"Cleaning Products","name":"Glass cleaner"}
+{"type":"Cleaning Products","name":"Mop"}
+{"type":"Cleaning Products","name":"Sponges"}
+{"type":"Others","name":"Batteries"}
+{"type":"Others","name":"Light Bulbs"}
+{"type":"Others","name":"Newspaper"}
+{"type":"Others","name":"Greeting cards"}
+{"type":"Others","name":"Insect Repellent"}
+{"type":"Others","name":"Flowers"}
+{"type":"Medicines","name":"Allergy"}
+{"type":"Medicines","name":"Antibiotic"}
+{"type":"Medicines","name":"Aspirin"}
+{"type":"Medicines","name":"Antacid"}
+{"type":"Medicines","name":"Pain reliever"}
+{"type":"Medicines","name":"Band-Aids"}
+{"type":"Medicines","name":"Precription pick-up"}
+{"type":"Medicines","name":"Cold/Flu/Sinus"}
+{"type":"Kitchen","name":"Aluminium Foil"}
+{"type":"Kitchen","name":"Napkins"}
+{"type":"Kitchen","name":"Wax Paper"}
+{"type":"Kitchen","name":"Paper Towels"}
+{"type":"Kitchen","name":"Plastic Wrap"}
+{"type":"Kitchen","name":"Freezer Bags"}
+{"type":"Beverages","name":"Soda"}
+{"type":"Beverages","name":"Sports Drink"}
+{"type":"Beverages","name":"Wine"}
+{"type":"Beverages","name":"Champagne"}
+{"type":"Beverages","name":"Gin"}
+{"type":"Beverages","name":"Juice"}
+{"type":"Beverages","name":"Beer"}
+{"type":"Beverages","name":"Soda Pop"}
+{"type":"Beverages","name":"Mixers"}
+{"type":"Beverages","name":"Vodka"}
+{"type":"Beverages","name":"Whiskey"}
+{"type":"Seafood","name":"Catfish"}
+{"type":"Seafood","name":"Crab"}
+{"type":"Seafood","name":"Lobster"}
+{"type":"Seafood","name":"Oysters"}
+{"type":"Seafood","name":"Salmon"}
+{"type":"Seafood","name":"Shrimp"}
+{"type":"Seafood","name":"Tuna"}
+{"type":"Meat","name":"Chicken"}
+{"type":"Meat","name":"Ham/Pork"}
+{"type":"Meat","name":"Beef"}
+{"type":"Meat","name":"Turkey"}
+{"type":"Meat","name":"Hot Dogs"}
+{"type":"Meat","name":"Bacon"}
+{"type":"Fruits","name":"Kiwis"}
+{"type":"Fruits","name":"Grapes"}
+{"type":"Fruits","name":"Oranges"}
+{"type":"Fruits","name":"Apples"}
+{"type":"Fruits","name":"Pears"}
+{"type":"Fruits","name":"Plums"}
+{"type":"Fruits","name":"Banana"}
+{"type":"Electronics","name":"Television"}
+{"type":"Electronics","name":"Mobile Phones"}
+{"type":"Electronics","name":"Cordless Phones"}
+{"type":"Electronics","name":"Microwave Oven"}
+{"type":"Electronics","name":"OTG"}
+{"type":"Electronics","name":"Water heater"}
+{"type":"Electronics","name":"AC"}
+{"type":"Electronics","name":"Fan"}
+{"type":"Electronics","name":"Laptops"}
+{"type":"Electronics","name":"Camera"}
+{"type":"Electronics","name":"Speakers"}
+{"type":"Electronics","name":"Headphones"}
+{"type":"Electronics","name":"Earphones"}
+{"type":"Electronics","name":"USB cable"}
+{"type":"Electronics","name":"Chargers"}
+{"type":"Electronics","name":"Wi-Fi Router"}
+{"type":"Electronics","name":"Refrigerator"}
+{"type":"Electronics","name":"Electric Gas Stove"}
+{"type":"Electronics","name":"Powerbank"}
+{"type":"Electronics","name":"Washer"}
+{"type":"Electronics","name":"Dryer"}
+{"type":"Electronics","name":"Dishwasher"}
+{"type":"Electronics","name":"Printer"}
+{"type":"Electronics","name":"Paper shredder"}
+{"type":"Office Supplies","name":"CDRs/DVDRs"}
+{"type":"Office Supplies","name":"Notepads"}
+{"type":"Office Supplies","name":"Glue/Tape"}
+{"type":"Office Supplies","name":"Postage Stamps"}
+{"type":"Office Supplies","name":"Pens/Pencils"}
+{"type":"Office Supplies","name":"CDRs/DVDRs"}
+{"type":"Personal Care","name":"Deodorant"}
+{"type":"Personal Care","name":"Bath Soap"}
+{"type":"Personal Care","name":"Cosmetics"}
+{"type":"Personal Care","name":"Facial Tissues"}
+{"type":"Personal Care","name":"Mouthwash"}
+{"type":"Personal Care","name":"Sunblock"}
+{"type":"Personal Care","name":"Shampoo"}
+{"type":"Furniture","name":"Sofa"}
+{"type":"Furniture","name":"Chairs"}
+{"type":"Furniture","name":"Table"}
+{"type":"Furniture","name":"Mattress"}
+{"type":"Furniture","name":"Bed"}
+{"type":"Furniture","name":"Coffee Table"}
+{"type":"Furniture","name":"Teapoy"}
+{"type":"Furniture","name":"Recliners"}
+{"type":"Furniture","name":"Wardrobe"}
+{"type":"Furniture","name":"Shoe Rack"}
+{"type":"Furniture","name":"Study Desk"}
+{"type":"Furniture","name":"Book shelf"}
+{"type":"Furniture","name":"Cabinets"}
+{"type":"Home Decor","name":"Rug"}
+{"type":"Home Decor","name":"Carpet"}
+{"type":"Home Decor","name":"Curtains"}
+{"type":"Home Decor","name":"Vaze"}
+{"type":"Home Decor","name":"Photo Frames"}
+{"type":"Home Decor","name":"Chimes"}
+{"type":"Home Decor","name":"Mats"}
+{"type":"Home Decor","name":"Lamps"}
+{"type":"Home Decor","name":"Wall hanging"}
+{"type":"Home Decor","name":"Mirrors"}
+{"type":"Apparels","name":"T-shirts"}
+{"type":"Apparels","name":"Trousers"}
+{"type":"Apparels","name":"Denims"}
+{"type":"Apparels","name":"Jackets"}
+{"type":"Apparels","name":"Shirts"}
+{"type":"Apparels","name":"Coats"}
+{"type":"Apparels","name":"Suits"}
+{"type":"Apparels","name":"Dresses"}
+{"type":"Apparels","name":"Tops"}
+{"type":"Apparels","name":"Skirts"}
+{"type":"Apparels","name":"Cardigans"}
+{"type":"Apparels","name":"Tie"}
+{"type":"Apparels","name":"Socks"}
+{"type":"Apparels","name":"Sweatshirts"}
+{"type":"Apparels","name":"Frocks"}
+{"type":"Apparels","name":"Gowns"}
+{"type":"Apparels","name":"Track Pants"}
