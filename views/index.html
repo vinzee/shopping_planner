@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="jquery.min.js"></script> -->
+    <!-- <script src="rangeslider.min.js"></script> -->
+    <title>Shopping Planner</title>
+    <style>
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        float: left;
+        width: 70%;
+        height: 100%;
+      }
+      #right-panel {
+        margin: 20px;
+        border-width: 2px;
+        width: 20%;
+        height: 400px;
+        float: left;
+        text-align: left;
+        padding-top: 0;
+      }
+      #directions-panel {
+        margin-top: 10px;
+        background-color: #FFEE77;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+   
+  <div id="right-panel">
+	<div class="well">
+      <div class="row">
+        <div class="col-xs-6">
+          <form class="form-inline">
+            <div class="form-group">
+	<b>Radius</b>
+	<input type="range" min="0" max="50" value="0" step="5" id="radius_slider"/>
+	<span id="radius">0</span>
+	<div class="range-slider" data-slider>
+	  <span class="range-slider-handle" role="slider" tabindex="0"></span>
+	  <span class="range-slider-active-segment"></span>
+	  <input type="hidden">
+	</div>
+	
+  <div>
+  <b>Select Categories:</b><br>
+	<input type="checkbox" name="category" value="Groceries" />Groceries <br>
+	<input type="checkbox" name="category" value="Furniture" />Furniture <br>
+	<input type="checkbox" name="category" value="Electronics" />Electronics <br>
+	<input type="checkbox" name="category" value="Dairy" />Dairy <br>
+	<input type="checkbox" name="category" value="Baked_Products" />Baked Products <br>
+	<input type="checkbox" name="category" value="Cleaning_Products" />Cleaning Products <br>
+	<input type="checkbox" name="category" value="Medicines" />Medicines <br>
+	<input type="checkbox" name="category" value="Kitchen" />Kitchen <br>
+	<input type="checkbox" name="category" value="Beverages" />Beverages <br>
+	<input type="checkbox" name="category" value="Seafood" />Cleaning Products <br>
+	<input type="checkbox" name="category" value="Meat" />Medicines <br>
+	<input type="checkbox" name="category" value="Fruits" />Fruits <br> <br> 
+	<button type="button" class="btn btn-primary" id="get_direction_button">Get Directions</button>
+	
+    </div></div></form></div></div></div>
+    <div id="directions-panel"></div>
+    </div>
+   <div id="map"></div>
+    <script>
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: {lat: 41.85, lng: -87.65}
+        });
+        directionsDisplay.setMap(map);
+
+        document.getElementById('get_direction_button').addEventListener('click', function() {
+          // calculateAndDisplayRoute(directionsService, directionsDisplay);
+        });
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var waypts = [];
+        var checkboxArray = document.getElementById('waypoints');
+        for (var i = 0; i < checkboxArray.length; i++) {
+          if (checkboxArray.options[i].selected) {
+            waypts.push({
+              location: checkboxArray[i].value,
+              stopover: true
+            });
+          }
+        }
+
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
+          waypoints: waypts,
+          optimizeWaypoints: true,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+              var routeSegment = i + 1;
+              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                  '</b><br>';
+              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+            }
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChJ3LNJnP8m_iTE1lZhHQk_b5JYHaKKqY&callback=initMap">
+    </script>
+    <script>
+    $(document).ready(function(){
+        var lat, lng;        
+
+        if (navigator.geolocation) {
+            current_location = navigator.geolocation.getCurrentPosition(function(pos){
+              lat = pos.coords.latitude;
+              lng = pos.coords.longitude;
+            });
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+        
+        $('#radius_slider').change(function(){
+          $('#radius').text($(this).val());
+        });
+
+        $("#get_direction_button").click(function(){
+            var data = {};
+            data.categories = [];
+
+            $.each($("[name='category']:checked"), function(){
+              data.categories.push($(this).val());
+            });
+
+            data.radius = $('#radius_slider').val();
+            data.lat = lat;
+            data.lng = lng;
+
+            $.ajax({
+              type:"POST",
+              url: "/get_shortest_path",
+              data: data,
+              success: function(result){
+                console.log("Yay !", result);
+            }});
+        });
+    });
+    </script>
+  </body>
+</html>
