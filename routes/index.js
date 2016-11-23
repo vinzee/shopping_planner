@@ -9,12 +9,10 @@ var _ = require('underscore-node'),
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('homepage.html', { title: 'Shoping Planner' });
+	res.render('index.html', { title: 'Shopping Planner' });
 });
 
-router.get('/get_shortest_path', function(req, res, next) {
-	// console.log("\n req.query -- ", req.query);
-
+router.post('/get_shortest_path', function(req, res, next) {
 	req.query.lng = req.query.lng || -0.1278990;
 	req.query.lat = req.query.lat || 51.5032520;
 	req.query.radius = req.query.radius || 10;
