@@ -7,6 +7,7 @@ $(document).ready(function(){
         navigator.geolocation.getCurrentPosition(function(pos){
           ShoppingPlanner.current_lat = pos.coords.latitude;
           ShoppingPlanner.current_lng = pos.coords.longitude;
+          console.log('Current LatLng - [' , ShoppingPlanner.current_lat, ',' , ShoppingPlanner.current_lng , ']');
           ShoppingPlanner.map.setCenter(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng))
         });
     } else {
@@ -37,14 +38,14 @@ $(document).ready(function(){
           return;
         }
 
-        console.log(data);
+        console.log('Before Ajax' , data);
         $.ajax({
           type:"post",
           dataType:"json",
           url: "/get_shortest_path",
           data: data,
           success: function(result){
-            console.log("Yay !", result);
+            console.log("Ajax Success - ", result);
           },
           error: function(a, b, c){
             console.error("Ajax Error - ", a.responseJSON);
