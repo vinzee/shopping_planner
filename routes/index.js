@@ -9,12 +9,18 @@ var _ = require('underscore-node'),
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('homepage.html', { title: 'Shoping Planner' });
+	res.render('index.html', { title: 'Shopping Planner' });
 });
 
-router.get('/get_shortest_path', function(req, res, next) {
-	if(_.isNumber(req.query.lng) && _.isNumber(req.query.lat) && _.isNumber(req.query.radius) && _.isArray(req.query.product_types) && req.query.product_types.length > 0){
-		ClosestRouteCalculator.find(req.query.lat, req.query.lng, req.query.radius, req.query.product_types, function(data){
+router.post('/get_shortest_path', function(req, res, next) {
+	console.log('get_shortest_path Params - : ', req.body);
+	if(req.body.lng) req.body.lng = parseFloat(req.body.lng);
+	if(req.body.lat) req.body.lat = parseFloat(req.body.lat);
+	if(req.body.radius) req.body.radius = parseInt(req.body.radius);
+	if(req.body['product_types[]'] && !_.isArray(req.body['product_types[]'])) req.body['product_types[]'] = [req.body['product_types[]']];
+
+	if(!_.isNaN(req.body.lng) && !_.isNaN(req.body.lat) && !_.isNaN(req.body.radius) && req.body['product_types[]'].length > 0){
+		ClosestRouteCalculator.find(req.body.lat, req.body.lng, req.body.radius, req.body['product_types[]'], function(data){
 			if (!_.isEmpty(data.err)) {
 		      res.status(500).json(data.err);
 		    } else {
