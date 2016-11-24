@@ -13,20 +13,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/get_shortest_path', function(req, res, next) {
-	// console.log("\n req.query -- ", req.query);
-
-	req.query.lng = req.query.lng || -0.1278990;
-	req.query.lat = req.query.lat || 51.5032520;
-	req.query.radius = req.query.radius || 10;
-	req.query.products = req.query.products || ['Cereal'];
-
-	ClosestRouteCalculator.find([req.query.lat, req.query.lng], req.query.radius, req.query.products, function(data){
-		if (!_.isEmpty(data.err)) {
-	      res.status(500).json(data.err);
-	    } else {
-	      res.status(200).json({data: data.path});
-	    }
-	});
+	if(_.isNumber(req.query.lng) && _.isNumber(req.query.lat) && _.isNumber(req.query.radius) && _.isArray(req.query.product_types) && req.query.product_types.length > 0){
+		ClosestRouteCalculator.find(req.query.lat, req.query.lng, req.query.radius, req.query.product_types, function(data){
+			if (!_.isEmpty(data.err)) {
+		      res.status(500).json(data.err);
+		    } else {
+		      res.status(200).json({data: data.path});
+		    }
+		});
+	}else{
+		res.status(500).json('Invalid params');
+	}
 });
 
 module.exports = router;
