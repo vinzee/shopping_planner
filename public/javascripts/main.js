@@ -10,10 +10,10 @@ $(document).ready(function(){
           ShoppingPlanner.map.setCenter(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng))
         });
     } else {
-        console.error("Geolocation is not supported by this browser.");
+        console.error("Geolocation is not supported by this browser !");
     }
 
-    $('#radius_slider').change(function(){
+    $('#radius_slider').slider().change(function(){
       $('#radius').text($(this).val());
     });
 
@@ -30,7 +30,10 @@ $(document).ready(function(){
         data.lng = ShoppingPlanner.current_lng;
 
         if(data.product_types.length == 0){
-          console.error('No categories selected');
+          $('.top-left').notify({
+            message: { text: 'Please select atleast one category ! ' },
+            type: 'warning'
+          }).show();
           return;
         }
 

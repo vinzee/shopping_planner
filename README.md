@@ -16,6 +16,7 @@ $ sudo mongod --dbpath=/var/lib/mongodb
 ### Starting the app
 ```sh
 $ npm install
+$ bower install
 $ sudo npm install -g yo grunt grunt-cli bower
 $ sudo npm install -g express-generator express-mongoose-generator generator-bootstrap generator-mongoose
 $ npm start
@@ -40,6 +41,8 @@ yo mongoose:schema "product|name:String,type:String"
 ```
 
 ### Important Links -
+* bootstrap notify - http://goodybag.github.io/bootstrap-notify/
+* bower setup - https://www.digitalocean.com/community/tutorials/how-to-manage-front-end-javascript-and-css-dependencies-with-bower-on-ubuntu-14-04
 * express-generator - https://www.npmjs.com/package/express-generator
 	Express App generator
 * What is yeoman ? - http://yeoman.io/learning/index.html
