@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="jquery.min.js"></script> -->
+    <!-- <script src="rangeslider.min.js"></script> -->
+    <script src="javascripts/main.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>Shopping Planner</title>
+  </head>
+
+  <body>
+    <div class="container" id='page_container'>
+      <div class="row">
+        <div class="col-xs-3 well" id="left-panel">
+          <form class="form form-inline">
+          <br>
+            <b>Radius</b> - <span id="radius">10</span>
+          <input type="range" min="2" max="50" value="10" step="2" id="radius_slider"/>
+            <br>
+
+          <div class="range-slider" data-slider>
+            <span class="range-slider-handle" role="slider" tabindex="0"></span>
+            <span class="range-slider-active-segment"></span>
+            <input type="hidden">
+          </div>
+
+            <div>
+              <b>Select Categories:</b><br>
+              <input type="checkbox" name="category" value="Groceries" /> Groceries <br>
+              <input type="checkbox" name="category" value="Furniture" /> Furniture <br>
+              <input type="checkbox" name="category" value="Electronics" /> Electronics <br>
+              <input type="checkbox" name="category" value="Dairy" /> Dairy <br>
+              <input type="checkbox" name="category" value="Baked_Products" /> Baked Products <br>
+              <input type="checkbox" name="category" value="Cleaning_Products" /> Cleaning Products <br>
+              <input type="checkbox" name="category" value="Medicines" /> Medicines <br>
+              <input type="checkbox" name="category" value="Kitchen" /> Kitchen <br>
+              <input type="checkbox" name="category" value="Beverages" /> Beverages <br>
+              <input type="checkbox" name="category" value="Seafood" /> Cleaning Products <br>
+              <input type="checkbox" name="category" value="Meat" /> Medicines <br>
+              <input type="checkbox" name="category" value="Fruits" /> Fruits <br> <br>
+              <button type="button" class="btn btn-primary" id="get_direction_button"> Get Directions</button>
+            </div>
+          </form>
+          <div id="directions-panel"></div>
+        </div>
+        <div class="col-xs-9">
+          <div id="map"></div>
+        </div>
+      </div> <!-- row -->
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChJ3LNJnP8m_iTE1lZhHQk_b5JYHaKKqY&callback=initMap"></script>
+    <script src="javascripts/google_maps.js"></script>
+  </body>
+</html>

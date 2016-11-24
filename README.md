@@ -16,7 +16,8 @@ $ sudo mongod --dbpath=/var/lib/mongodb
 ### Starting the app
 ```sh
 $ npm install
-$ sudo npm install -g yo express-generator express-mongoose-generator generator-bootstrap generator-mongoose grunt
+$ sudo npm install -g yo grunt grunt-cli bower
+$ sudo npm install -g express-generator express-mongoose-generator generator-bootstrap generator-mongoose
 $ npm start
 $ Goto - http://localhost:3000
 ```
