@@ -2,6 +2,7 @@ var _ = require('underscore-node'),
 	express = require('express'),
 	router = express.Router(),
 	ClosestRouteCalculator = require('../lib/closest_route_calculator'),
+	DistanceCalculator = require('../lib/getDistance'),
     // mongoose = require('mongoose'),
     // Shop = mongoose.models.Shop,
     // Product = mongoose.models.Product,
@@ -22,9 +23,13 @@ router.post('/get_shortest_path', function(req, res, next) {
 	if(!_.isNaN(req.body.lng) && !_.isNaN(req.body.lat) && !_.isNaN(req.body.radius) && req.body['product_types[]'].length > 0){
 		ClosestRouteCalculator.find(req.body.lat, req.body.lng, req.body.radius, req.body['product_types[]'], function(data){
 			if (!_.isEmpty(data.err)) {
-		      res.status(500).json(data.err);
+		      	res.status(500).json(data.err);
 		    } else {
-		      res.status(200).json({data: data.path});
+				DistanceCalculator.find(data.path, function(dist){
+					console.log('distance inside ClosestRouteCalculator method : ');
+					console.log(dist);
+				});
+				res.status(200).json({data: data.path});
 		    }
 		});
 	}else{
