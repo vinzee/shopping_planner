@@ -3,17 +3,6 @@
 var ShoppingPlanner = {};
 
 $(document).ready(function(){
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(pos){
-          ShoppingPlanner.current_lat = pos.coords.latitude;
-          ShoppingPlanner.current_lng = pos.coords.longitude;
-          console.log('Current LatLng - [' , ShoppingPlanner.current_lat, ',' , ShoppingPlanner.current_lng , ']');
-          ShoppingPlanner.map.setCenter(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng))
-        });
-    } else {
-        console.error("Geolocation is not supported by this browser !");
-    }
-
     $('#radius_slider').slider().change(function(){
       $('#radius').text($(this).val());
     });
@@ -31,10 +20,7 @@ $(document).ready(function(){
         data.lng = ShoppingPlanner.current_lng;
 
         if(data.product_types.length == 0){
-          $('.top-left').notify({
-            message: { text: 'Please select atleast one category ! ' },
-            type: 'warning'
-          }).show();
+          ShoppingPlanner.showError('Please select atleast one category ! ');
           return;
         }
 
@@ -55,3 +41,9 @@ $(document).ready(function(){
     });
 });
 
+ShoppingPlanner.showError = function(msg){
+  $('.top-left').notify({
+    message: { text:  msg},
+    type: 'warning'
+  }).show();
+}
