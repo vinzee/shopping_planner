@@ -19,6 +19,7 @@ $ npm install
 $ bower install
 $ sudo npm install -g yo grunt grunt-cli bower
 $ sudo npm install -g express-generator express-mongoose-generator generator-bootstrap generator-mongoose
+$ sudo npm install geolib
 $ npm start
 $ Goto - http://localhost:3000
 ```

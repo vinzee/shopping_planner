@@ -45,7 +45,8 @@ $(document).ready(function(){
           url: "/get_shortest_path",
           data: data,
           success: function(result){
-            console.log("Ajax Success - ", result);
+            console.log("Ajax Success - ", result.data.coords);
+              ShoppingPlanner.calculateAndDisplayRoute(result.data.coords);
           },
           error: function(a, b, c){
             console.error("Ajax Error - ", a.responseJSON);
