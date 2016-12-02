@@ -11,15 +11,11 @@ $(document).ready(function () {
         dataType: "json",
         url: 'jsonData/distinct.json',
         success: function (result) {
-            $.each(result, function (i, type) {
-                if (i == 'subcategory') {
-                    $.each(type, function (j, list) {
-                        var addCheckbox = '<input type="checkbox" name="category" value="' + list + '"/>' + list
-                            + '<br>';
-                        $("#checkboxJson").append(addCheckbox);
-                    });
-                }
-            })
+            var addCheckbox = '';
+            $.each(result.subcategory, function (j, list) {
+                addCheckbox += '<input type="checkbox" name="category" value="' + list + '"/>' + list + '<br>';
+            });
+            $("#checkboxJson").append(addCheckbox);
         }
     });
 
