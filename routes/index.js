@@ -1,12 +1,7 @@
 var _ = require('underscore-node'),
 	express = require('express'),
 	router = express.Router(),
-	ClosestRouteCalculator = require('../lib/closest_route_calculator'),
-	DistanceCalculator = require('../lib/getDistance'),
-    // mongoose = require('mongoose'),
-    // Shop = mongoose.models.Shop,
-    // Product = mongoose.models.Product,
-    api = {};
+	ClosestRouteCalculator = require('../lib/closest_route_calculator');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,11 +20,6 @@ router.post('/get_shortest_path', function(req, res, next) {
 			if (!_.isEmpty(data.err)) {
 		      	res.status(500).json(data.err);
 		    } else {
-				DistanceCalculator.find(data.path, function(dist){
-					console.log('distance inside ClosestRouteCalculator method : ');
-					console.log(dist);
-                    data.coords = dist;
-				});
 				res.status(200).json({data: data.coords});
 		    }
 		});
