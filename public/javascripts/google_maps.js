@@ -1,4 +1,4 @@
-function initMap() {
+ShoppingPlanner.initMap = function () {
     ShoppingPlanner.directionsService = new google.maps.DirectionsService;
     ShoppingPlanner.directionsDisplay = new google.maps.DirectionsRenderer;
     ShoppingPlanner.map = new google.maps.Map(document.getElementById('map'), {
