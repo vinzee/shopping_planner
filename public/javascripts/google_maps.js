@@ -80,25 +80,26 @@ ShoppingPlanner.initSearchBox = function() {
     }
 
     // Clear out the old markers.
-    // markers.forEach(function(marker) {
-    //   marker.setMap(null);
-    // });
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
     markers = [];
 
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
-    
-    places.forEach(function(place) {
+
+    // TODO - remove this loop (shouldn't be required !)
+    // places.forEach(function(place) {
+      place = places[0];
       if (!place.geometry) {
         console.log("Returned place contains no geometry");
         return;
       }
       // Create a marker for each place.
       markers.push(new google.maps.Marker({
-        map: map,
+        map: ShoppingPlanner.map,
         icon: ShoppingPlanner.homeIcon,
-        title: place.
-        name,
+        title: place.name,
         position: place.geometry.location
       }));
 
@@ -106,12 +107,13 @@ ShoppingPlanner.initSearchBox = function() {
         bounds.union(place.geometry.viewport);
       else
         bounds.extend(place.geometry.location);
-    });
+
+      ShoppingPlanner.current_lat = place.geometry.location.lat();
+      ShoppingPlanner.current_lng = place.geometry.location.lng();
+    // });
     ShoppingPlanner.map.fitBounds(bounds);
 
     // TODO - set this point as the current latlng
-    // ShoppingPlanner.current_lat = ;
-    // ShoppingPlanner.current_lng = ;
   });
 }
 
@@ -127,7 +129,7 @@ ShoppingPlanner.addMarker = function(location, icon, title){
     icon: icon,
     title: title,
     position: location
-  });  
+  });
 }
 
 ShoppingPlanner.initHomeIcon = function(){
