@@ -28,8 +28,9 @@ router.post('/get_shortest_path', function(req, res, next) {
 				DistanceCalculator.find(data.path, function(dist){
 					console.log('distance inside ClosestRouteCalculator method : ');
 					console.log(dist);
+                    data.coords = dist;
 				});
-				res.status(200).json({data: data.path});
+				res.status(200).json({data: data.coords});
 		    }
 		});
 	}else{

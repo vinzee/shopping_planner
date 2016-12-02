@@ -1,50 +1,41 @@
 function initMap() {
-  var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer;
-  ShoppingPlanner.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 6,
-    center: {lat: 41.85, lng: -87.65}
-  });
-  directionsDisplay.setMap(ShoppingPlanner.map);
-
-  document.getElementById('get_direction_button').addEventListener('click', function() {
-    // calculateAndDisplayRoute(directionsService, directionsDisplay);
-  });
+    ShoppingPlanner.directionsService = new google.maps.DirectionsService;
+    ShoppingPlanner.directionsDisplay = new google.maps.DirectionsRenderer;
+    ShoppingPlanner.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
+        center: {lat: 41.85, lng: -87.65}
+    });
+    ShoppingPlanner.directionsDisplay.setMap(ShoppingPlanner.map);
 }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-  var waypts = [];
-  var checkboxArray = document.getElementById('waypoints');
-  for (var i = 0; i < checkboxArray.length; i++) {
-    if (checkboxArray.options[i].selected) {
-      waypts.push({
-        location: checkboxArray[i].value,
-        stopover: true
-      });
-    }
-  }
+ShoppingPlanner.calculateAndDisplayRoute = function(coordinates) {
+    var waypts = _.map(coordinates, function(coordinate){
+        return { location: coordinate[0]+","+coordinate[1], stopover: true };
+    });
 
-  directionsService.route({
-    origin: document.getElementById('start').value,
-    destination: document.getElementById('end').value,
+    ShoppingPlanner.directionsService.route({
+    origin: ShoppingPlanner.current_lat+","+ShoppingPlanner.current_lng,
+    destination: ShoppingPlanner.current_lat+","+ShoppingPlanner.current_lng,
     waypoints: waypts,
+    //waypoints:   ['Vancouver, BC', 'Seattle, WA'],
     optimizeWaypoints: true,
     travelMode: 'DRIVING'
   }, function(response, status) {
     if (status === 'OK') {
-      directionsDisplay.setDirections(response);
+      ShoppingPlanner.directionsDisplay.setDirections(response);
+
       var route = response.routes[0];
-      var summaryPanel = document.getElementById('directions-panel');
-      summaryPanel.innerHTML = '';
+      var summaryPanel_html = "";
       // For each route, display summary information.
       for (var i = 0; i < route.legs.length; i++) {
         var routeSegment = i + 1;
-        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+          summaryPanel_html += '<b>Route Segment: ' + routeSegment +
             '</b><br>';
-        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+          summaryPanel_html += route.legs[i].start_address + ' to ';
+          summaryPanel_html += route.legs[i].end_address + '<br>';
+          summaryPanel_html += route.legs[i].distance.text + '<br><br>';
       }
+      $('#directions-panel').html(summaryPanel_html);
     } else {
       window.alert('Directions request failed due to ' + status);
     }
