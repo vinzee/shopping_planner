@@ -9,6 +9,7 @@
     <link href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/style.css">
 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChJ3LNJnP8m_iTE1lZhHQk_b5JYHaKKqY&callback=ShoppingPlanner.initMap"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -16,17 +17,17 @@
     <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
     <script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
     <script src="javascripts/main.js"></script>
+    <script src="javascripts/google_maps.js"></script>
 
     <title>Shopping Planner</title>
   </head>
 
   <body>
     <div class='notifications top-left'></div>
-    <div class="container" id='page_container'>
-      <div class="row">
+      <div class="row" id='page_container'>
         <div class="col-xs-3 well" id="left-panel">
           <form class="form form-inline">
-          <br>
+            <br>
             <b>Radius</b>
             <span id="radius">10</span>
             <input type="range" data-slider-min="2" data-slider-max="50" data-slider-value="10" data-slider-step="2" id="radius_slider"/>
@@ -57,9 +58,6 @@
           <div id="map"></div>
         </div>
       </div> <!-- row -->
-
     </div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChJ3LNJnP8m_iTE1lZhHQk_b5JYHaKKqY&callback=initMap"></script>
-    <script src="javascripts/google_maps.js"></script>
   </body>
 </html>
