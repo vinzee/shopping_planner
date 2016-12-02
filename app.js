@@ -15,7 +15,6 @@ var shop = require('./models/shop');
 
 // routes
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var products = require('./api/product');
 var shops = require('./api/shop');
 
@@ -25,17 +24,13 @@ var app = express();
 
 var helpers = require('./lib/helpers');
 
-// ------------------extras---------------------
-app.engine('html', require('ejs').renderFile);
-// app.set('view engine', 'html');
-// ---------------------------------------------
 
 // view engine setup
+app.engine('html', require('ejs').renderFile);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'html'); // jade
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,7 +39,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static( path.join(__dirname, '/bower_components')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/', products);
 app.use('/', shops);
 
@@ -71,9 +65,7 @@ if (app.get('env') === 'development') {
   app.set('view options', {
       pretty: true
   });
-}
-
-if (app.get('env') === 'test') {
+}else if (app.get('env') === 'test') {
     app.use(morgan('test'));
     app.use(errorhandler({
         dumpExceptions: true,
@@ -82,9 +74,7 @@ if (app.get('env') === 'test') {
     app.set('view options', {
         pretty: true
     });
-}
-
-if (app.get('env') === 'production') {
+}else if (app.get('env') === 'production') {
     app.use(morgan());
      app.use(errorhandler({
         dumpExceptions: false,
