@@ -36,9 +36,9 @@ ShoppingPlanner.setCurrentLocation = function () {
     }
 }
 
-ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
-    var waypts = _.map(coordinates, function (coordinate) {
-        return {location: coordinate[0] + "," + coordinate[1], stopover: true};
+ShoppingPlanner.calculateAndDisplayRoute = function (data) {
+    var waypts = _.map(data, function (tuple) {
+        return {location: tuple.coords[0] + "," + tuple.coords[1], stopover: true};
     });
 
 
@@ -54,8 +54,8 @@ ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
             ShoppingPlanner.deleteAllMarkers();
 
             ShoppingPlanner.addHomeMarker();
-            _.each(coordinates, function(coords){
-                ShoppingPlanner.addMarker(new google.maps.LatLng(coords[0], coords[1]), "My shop", "My shop");
+            _.each(data, function(tuple){
+                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coords[0], tuple.coords[1]), "My shop", "My shop");
             });
 
             var route = response.routes[0];
