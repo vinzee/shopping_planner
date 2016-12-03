@@ -35,9 +35,11 @@
                     <input type="range" data-slider-min="2" data-slider-max="50" data-slider-value="10" data-slider-step="2" id="radius_slider"/><br><br>
                     <b>Categories</b><br>
                     <select id="subcategory"></select><br><br>
-                    <button type="button" class="btn btn-primary btn-block" id="get_direction_button"> Get Directions </button>
+                    <button type="button" class="btn btn-primary btn-block" id="get_direction_button"> Get Directions </button><br>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-sm hidden" data-toggle="modal" data-target="#directionsModal" id="directionsModalButton">See detailed directions</button>
                 </form>
-                <div id="directions-panel" class="hidden"></div>
             </div>
             <div class="col-xs-9">
                 <div id="map"></div>
@@ -46,3 +48,22 @@
         <script async defer src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyChJ3LNJnP8m_iTE1lZhHQk_b5JYHaKKqY&libraries=places&callback=ShoppingPlanner.initMap"></script>
     </body>
 </html>
+
+
+<!-- Modal -->
+<div class="modal fade" id="directionsModal" tabindex="-1" role="dialog" aria-labelledby="directionsModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="directionsModalLabel">Route</h4>
+      </div>
+      <div class="modal-body">
+        <div id="directions-panel"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

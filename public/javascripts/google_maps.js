@@ -1,8 +1,10 @@
 ShoppingPlanner.initMap = function () {
     ShoppingPlanner.directionsService = new google.maps.DirectionsService;
     ShoppingPlanner.directionsDisplay = new google.maps.DirectionsRenderer({
-        suppressMarkers: true
+        suppressMarkers: true,
+        panel: document.getElementById('directions-panel')
     });
+
     ShoppingPlanner.geocoder = new google.maps.Geocoder();
     ShoppingPlanner.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
@@ -58,15 +60,15 @@ ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
 
             var route = response.routes[0];
 
-            var summaryPanel_html = "";
+            // var summaryPanel_html = "";
             // For each route, display summary information.
-            for (var i = 0; i < route.legs.length; i++) {
-                summaryPanel_html += '<b>Route Segment: ' + i + 1 + '</b><br>' +
-                                    route.legs[i].start_address + ' to ' +
-                                    route.legs[i].end_address + '<br>' +
-                                    route.legs[i].distance.text + '<br><br>';
-            }
-            $('#directions-panel').html(summaryPanel_html).removeClass('hidden');
+            // for (var i = 0; i < route.legs.length; i++) {
+            //     summaryPanel_html += '<b>Route Segment: ' + i + 1 + '</b><br>' +
+            //                         route.legs[i].start_address + ' to ' +
+            //                         route.legs[i].end_address + '<br>' +
+            //                         route.legs[i].distance.text + '<br><br>';
+            // }
+            $('#directionsModalButton').removeClass('hidden'); // .html(summaryPanel_html)
         } else {
             ShoppingPlanner.error('Failed to load Directions.');
             console.error('Directions request failed due to ' + status);
