@@ -3,6 +3,7 @@
 var ShoppingPlanner = {};
 
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     $('#radius_slider').slider().change(function () {
         $('#radius').text($(this).val());
     });
@@ -11,22 +12,22 @@ $(document).ready(function () {
         dataType: "json",
         url: 'jsonData/distinct.json',
         success: function (result) {
-            var addCheckbox = '';
-            $.each(result.subcategory, function (j, list) {
-                addCheckbox += '<input type="checkbox" name="category" value="' + list + '"/>' + list + '<br>';
+            var subcategories = _.map(result.subcategory, function (subcategory) {
+                return {id: subcategory, text: subcategory};
             });
-            $("#checkboxJson").append(addCheckbox);
+
+            $("#subcategory").select2({
+                placeholder: 'Select categories',
+                data: subcategories,
+                multiple: true,
+                maximumSelectionLength: 5
+            });
         }
     });
 
     $("#get_direction_button").click(function () {
         var data = {};
-        data.product_types = [];
-
-        $.each($("[name='category']:checked"), function () {
-            data.product_types.push($(this).val());
-        });
-
+        data.product_types = $("#subcategory").select2('val');
         data.radius = $('#radius_slider').val();
         data.lat = ShoppingPlanner.current_lat;
         data.lng = ShoppingPlanner.current_lng;

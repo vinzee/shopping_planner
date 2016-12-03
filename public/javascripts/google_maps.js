@@ -1,14 +1,19 @@
 ShoppingPlanner.initMap = function () {
     ShoppingPlanner.directionsService = new google.maps.DirectionsService;
     ShoppingPlanner.directionsDisplay = new google.maps.DirectionsRenderer;
+    ShoppingPlanner.geocoder = new google.maps.Geocoder();
     ShoppingPlanner.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 6,
+        zoom: 15,
         center: {lat: 41.85, lng: -87.65}
     });
     ShoppingPlanner.directionsDisplay.setMap(ShoppingPlanner.map);
     ShoppingPlanner.setCurrentLocation();
     ShoppingPlanner.initHomeIcon();
     ShoppingPlanner.initSearchBox();
+
+    setTimeout(function(){
+        $('#pac-input').removeClass('hidden');
+    }, 700);
 }
 
 ShoppingPlanner.setCurrentLocation = function () {
@@ -16,7 +21,7 @@ ShoppingPlanner.setCurrentLocation = function () {
         navigator.geolocation.getCurrentPosition(function (pos) {
             ShoppingPlanner.current_lat = pos.coords.latitude;
             ShoppingPlanner.current_lng = pos.coords.longitude;
-            console.log('Current LatLng - [', ShoppingPlanner.current_lat, ',', ShoppingPlanner.current_lng, ']');
+            ShoppingPlanner.geocode(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng);
             ShoppingPlanner.map.setCenter(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng));
             ShoppingPlanner.addHomeMarker(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng));
         });
@@ -52,7 +57,7 @@ ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
                 summaryPanel_html += route.legs[i].end_address + '<br>';
                 summaryPanel_html += route.legs[i].distance.text + '<br><br>';
             }
-            $('#directions-panel').html(summaryPanel_html);
+            $('#directions-panel').html(summaryPanel_html).removeClass('hidden');
         } else {
             window.alert('Directions request failed due to ' + status);
         }
@@ -60,7 +65,7 @@ ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
 }
 
 ShoppingPlanner.initSearchBox = function () {
-    var input = $('#pac-input').removeClass('hidden')[0];
+    var input = $('#pac-input')[0];
     var searchBox = new google.maps.places.SearchBox(input);
     ShoppingPlanner.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -140,4 +145,20 @@ ShoppingPlanner.initHomeIcon = function () {
         anchor: new google.maps.Point(17, 34),
         scaledSize: new google.maps.Size(25, 25)
     }
+}
+
+ShoppingPlanner.geocode = function(lat, lng){
+    var latlng = new google.maps.LatLng(lat, lng);
+    ShoppingPlanner.geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK){
+          if(results[1]){
+            $('#current_location').text(results[1].formatted_address);
+          }else{
+            ShoppingPlanner.error('No results found');
+          }
+        }else{
+          ShoppingPlanner.error('Error in getting current location.');
+          console.error('Error geocoding current location.', status);
+        }
+    });
 }
