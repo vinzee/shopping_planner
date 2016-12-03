@@ -9,7 +9,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/get_shortest_path', function(req, res, next) {
-	console.log('get_shortest_path Params - : ', req.body);
+
+    console.log('get_shortest_path Params - : ');
+	console.log(req.body);
+
 	if(req.body.lng) req.body.lng = parseFloat(req.body.lng);
 	if(req.body.lat) req.body.lat = parseFloat(req.body.lat);
 	if(req.body.radius) req.body.radius = parseInt(req.body.radius);
@@ -20,7 +23,7 @@ router.post('/get_shortest_path', function(req, res, next) {
 			if (!_.isEmpty(data.err)) {
 				res.status(404).json(data.err);
 		    } else {
-				res.status(200).json(data.coords);
+				res.status(200).json(data);
 		    }
 		});
 	}else{

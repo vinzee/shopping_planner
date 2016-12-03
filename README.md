@@ -24,6 +24,16 @@ $ npm start
 $ Goto - http://localhost:3000
 ```
 
+### Building application
+Install dependencies <br>
+``
+$ bower install <package-name>
+`` <br>
+Add required dependencies from existing code <br>
+``
+$ bower install
+`` <br>
+
 ### One time setup per project
 ```
 https://expressjs.com/en/starter/generator.html
@@ -40,6 +50,9 @@ https://expressjs.com/en/starter/generator.html
 yo mongoose:schema "shop|name:String,type:String,category:String,subcategory:String,coordinates:Array,city:String,country:String,address:String,postcode:String,owner:String,phone:String"
 yo mongoose:schema "product|name:String,type:String"
 ```
+### Software
+* Git - https://git-scm.com/downloads
+* Webstorm - https://www.jetbrains.com/webstorm/download/
 
 ### Important Links -
 * mongo Geonear radius - https://docs.mongodb.com/v3.2/reference/command/geoNear/
