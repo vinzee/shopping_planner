@@ -38,9 +38,8 @@ ShoppingPlanner.setCurrentLocation = function () {
 
 ShoppingPlanner.calculateAndDisplayRoute = function (data) {
     var waypts = _.map(data, function (tuple) {
-        return {location: tuple.coords[0] + "," + tuple.coords[1], stopover: true};
+        return {location: tuple.coordinate[0] + "," + tuple.coordinate[1], stopover: true};
     });
-
 
     ShoppingPlanner.directionsService.route({
         origin: ShoppingPlanner.current_lat + "," + ShoppingPlanner.current_lng,
@@ -55,7 +54,7 @@ ShoppingPlanner.calculateAndDisplayRoute = function (data) {
 
             ShoppingPlanner.addHomeMarker();
             _.each(data, function(tuple){
-                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coords[0], tuple.coords[1]), "My shop", "My shop");
+                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coordinate[0], tuple.coordinate[1]), tuple.name, tuple.address);
             });
 
             var route = response.routes[0];
@@ -70,7 +69,7 @@ ShoppingPlanner.calculateAndDisplayRoute = function (data) {
             // }
             $('#directionsModalButton').removeClass('hidden'); // .html(summaryPanel_html)
         } else {
-            ShoppingPlanner.error('Failed to load Directions.');
+            ShoppingPlanner.showError('Failed to load Directions.');
             console.error('Directions request failed due to ' + status);
         }
     });
@@ -108,8 +107,6 @@ ShoppingPlanner.initSearchBox = function () {
             console.error("Returned place contains no geometry");
             return;
         }
-        // Create a marker for each place.
-        ShoppingPlanner.addMarker(place.geometry.location, place.name);
 
         if (place.geometry.viewport)// Only geocodes have viewport.
             bounds.union(place.geometry.viewport);
@@ -120,13 +117,14 @@ ShoppingPlanner.initSearchBox = function () {
 
         ShoppingPlanner.current_lat = place.geometry.location.lat();
         ShoppingPlanner.current_lng = place.geometry.location.lng();
+        ShoppingPlanner.addHomeMarker();
     });
 }
 
 ShoppingPlanner.addHomeMarker = function (title, content) {
     ShoppingPlanner.deleteAllMarkers();
     var location = new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng)
-    ShoppingPlanner.addMarker(location, 'My home', 'My home', ShoppingPlanner.homeIcon);
+    ShoppingPlanner.addMarker(location, 'My home', ShoppingPlanner.current_address, ShoppingPlanner.homeIcon);
 }
 
 ShoppingPlanner.deleteAllMarkers = function(){
@@ -176,12 +174,13 @@ ShoppingPlanner.geocode = function(lat, lng){
     ShoppingPlanner.geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK){
           if(results[1]){
-            $('#current_location').text(results[1].formatted_address);
+            ShoppingPlanner.current_address = results[1].formatted_address;
+            $('#current_location').text(ShoppingPlanner.current_address);
           }else{
-            ShoppingPlanner.error('No results found');
+            ShoppingPlanner.showError('No results found');
           }
         }else{
-          ShoppingPlanner.error('Error in getting current location.');
+          ShoppingPlanner.showError('Error in getting current location.');
           console.error('Error geocoding current location.', status);
         }
     });
