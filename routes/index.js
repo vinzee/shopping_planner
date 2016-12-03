@@ -20,7 +20,7 @@ router.post('/get_shortest_path', function(req, res, next) {
 			if (!_.isEmpty(data.err)) {
 		      	res.status(500).json(data.err);
 		    } else {
-				res.status(200).json({data: data.coords});
+				res.status(200).json(data.coords);
 		    }
 		});
 	}else{
