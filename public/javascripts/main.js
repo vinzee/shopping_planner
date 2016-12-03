@@ -44,11 +44,16 @@ $(document).ready(function () {
             url: "/get_shortest_path",
             data: data,
             success: function (result) {
-                console.log("Ajax Success - ", result.data.coords);
-                ShoppingPlanner.calculateAndDisplayRoute(result.data.coords);
+                console.log("Ajax Success - ", result.coords);
+                ShoppingPlanner.calculateAndDisplayRoute(result.coords);
             },
             error: function (a, b, c) {
                 console.error("Ajax Error - ", a.responseJSON);
+                if(_.isArray(a.responseJSON)){
+                    _.each(a.responseJSON, function(err){
+                        ShoppingPlanner.showError(err);
+                    })
+                }
             }
         });
     });

@@ -10,6 +10,8 @@ ShoppingPlanner.initMap = function () {
     ShoppingPlanner.setCurrentLocation();
     ShoppingPlanner.initHomeIcon();
     ShoppingPlanner.initSearchBox();
+    ShoppingPlanner.markers = [];
+    // ShoppingPlanner.initForm();
 
     setTimeout(function(){
         $('#pac-input').removeClass('hidden');
@@ -23,7 +25,7 @@ ShoppingPlanner.setCurrentLocation = function () {
             ShoppingPlanner.current_lng = pos.coords.longitude;
             ShoppingPlanner.geocode(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng);
             ShoppingPlanner.map.setCenter(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng));
-            ShoppingPlanner.addHomeMarker(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng));
+            ShoppingPlanner.addHomeMarker(new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng), 'My home');
         });
     } else {
         console.error("Geolocation is not supported by this browser !");
@@ -39,7 +41,6 @@ ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
         origin: ShoppingPlanner.current_lat + "," + ShoppingPlanner.current_lng,
         destination: ShoppingPlanner.current_lat + "," + ShoppingPlanner.current_lng,
         waypoints: waypts,
-        //waypoints:   ['Vancouver, BC', 'Seattle, WA'],
         optimizeWaypoints: true,
         travelMode: 'DRIVING'
     }, function (response, status) {
@@ -50,18 +51,22 @@ ShoppingPlanner.calculateAndDisplayRoute = function (coordinates) {
             var summaryPanel_html = "";
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
-                var routeSegment = i + 1;
-                summaryPanel_html += '<b>Route Segment: ' + routeSegment +
-                    '</b><br>';
-                summaryPanel_html += route.legs[i].start_address + ' to ';
-                summaryPanel_html += route.legs[i].end_address + '<br>';
-                summaryPanel_html += route.legs[i].distance.text + '<br><br>';
+                summaryPanel_html += '<b>Route Segment: ' + i + 1 + '</b><br>' +
+                                    route.legs[i].start_address + ' to ' +
+                                    route.legs[i].end_address + '<br>' +
+                                    route.legs[i].distance.text + '<br><br>';
             }
             $('#directions-panel').html(summaryPanel_html).removeClass('hidden');
         } else {
-            window.alert('Directions request failed due to ' + status);
+            ShoppingPlanner.error('Failed to load Directions.');
+            console.error('Directions request failed due to ' + status);
         }
     });
+}
+
+ShoppingPlanner.initForm = function () {
+    ShoppingPlanner.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push($('#left-panel')[0]);
+    $('#left-panel').removeClass('hidden');
 }
 
 ShoppingPlanner.initSearchBox = function () {
@@ -74,7 +79,6 @@ ShoppingPlanner.initSearchBox = function () {
         searchBox.setBounds(ShoppingPlanner.map.getBounds());
     });
 
-    var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function () {
@@ -84,56 +88,61 @@ ShoppingPlanner.initSearchBox = function () {
             return;
         }
 
-        // Clear out the old markers.
-        markers.forEach(function (marker) {
-            marker.setMap(null);
-        });
-        markers = [];
-
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
 
-        // TODO - remove this loop (shouldn't be required !)
-        // places.forEach(function(place) {
         place = places[0];
         if (!place.geometry) {
             console.log("Returned place contains no geometry");
             return;
         }
         // Create a marker for each place.
-        markers.push(new google.maps.Marker({
-            map: ShoppingPlanner.map,
-            icon: ShoppingPlanner.homeIcon,
-            title: place.name,
-            position: place.geometry.location
-        }));
+        ShoppingPlanner.addMarker(place.geometry.location, place.name);
 
         if (place.geometry.viewport)// Only geocodes have viewport.
             bounds.union(place.geometry.viewport);
         else
             bounds.extend(place.geometry.location);
 
-        ShoppingPlanner.current_lat = place.geometry.location.lat();
-        ShoppingPlanner.current_lng = place.geometry.location.lng();
-        // });
         ShoppingPlanner.map.fitBounds(bounds);
 
-        // TODO - set this point as the current latlng
+        ShoppingPlanner.current_lat = place.geometry.location.lat();
+        ShoppingPlanner.current_lng = place.geometry.location.lng();
     });
 }
 
-ShoppingPlanner.addHomeMarker = function (location) {
-    ShoppingPlanner.addMarker(location, ShoppingPlanner.homeIcon);
+ShoppingPlanner.addHomeMarker = function (location, title, content) {
+    ShoppingPlanner.deleteAllMarkers();
+    ShoppingPlanner.addMarker(location, title, content, ShoppingPlanner.homeIcon);
+}
+ShoppingPlanner.deleteAllMarkers = function(){
+    _.each(ShoppingPlanner.markers, function(marker){
+        marker.setMap(null);
+    });
 }
 
-ShoppingPlanner.addMarker = function (location, icon, title) {
-    icon = _.extend({}, icon);
-    title = _.isNull(title) ? "Home" : title;
+ShoppingPlanner.addMarker = function (location, title, content, icon) {
+    content = _.isEmpty(content) ? '' : content;
+
     var marker = new google.maps.Marker({
         map: ShoppingPlanner.map,
         icon: icon,
         title: title,
         position: location
+    });
+
+    var final_content = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h5 id="firstHeading" class="firstHeading">' + title + '</h5>'+
+            '<div id="bodyContent">'+ content + '</div>'+
+            '</div>'
+    var infowindow = new google.maps.InfoWindow({
+        content: final_content
+    });
+
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
     });
 }
 

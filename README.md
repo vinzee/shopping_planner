@@ -42,6 +42,7 @@ yo mongoose:schema "product|name:String,type:String"
 ```
 
 ### Important Links -
+* mongo Geonear radius - https://docs.mongodb.com/v3.2/reference/command/geoNear/
 * Select2 - https://select2.github.io/examples.html
 * Geolib - https://www.npmjs.com/package/geolib
 * bootstrap notify - http://goodybag.github.io/bootstrap-notify/
