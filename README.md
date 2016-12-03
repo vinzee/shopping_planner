@@ -42,6 +42,7 @@ yo mongoose:schema "product|name:String,type:String"
 ```
 
 ### Important Links -
+* Select2 - https://select2.github.io/examples.html
 * Geolib - https://www.npmjs.com/package/geolib
 * bootstrap notify - http://goodybag.github.io/bootstrap-notify/
 * bower setup - https://www.digitalocean.com/community/tutorials/how-to-manage-front-end-javascript-and-css-dependencies-with-bower-on-ubuntu-14-04
