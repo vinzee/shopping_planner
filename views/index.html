@@ -26,9 +26,11 @@
         <div class="row" id='page_container'>
             <div class="col-xs-3 well" id="left-panel">
                 <form class="form form-inline" id="search_box">
+                    
                     <input id="pac-input" class="controls hidden" type="text" placeholder="Search Box"><br>
                     <div width="100%">
-                        <label class="form-label text-center" id="current_location" data-toggle="tooltip" data-placement="right" title="Current Location"></label><br><br>
+                        <button class="btn btn-link" id="go_to_current_location_button" data-toggle="tooltip" title="Home"><img src="images/home.png" width="20"/></button>
+                        <div><label class="form-label text-center" id="current_location" data-toggle="tooltip" data-placement="right" title="Current Location"></label><br><br>
                     </div>
                     <b data-toggle="tooltip" data-placement="right" title="Search Radius">Radius </b>
                     <span id="radius">10</span> miles
