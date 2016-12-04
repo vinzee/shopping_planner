@@ -61,7 +61,7 @@ $(document).ready(function () {
 });
 
 ShoppingPlanner.showError = function (msg) {
-    $('.top-left').notify({
+    $('.bottom-left').notify({
         message: {text: msg},
         type: 'warning'
     }).show();
