@@ -118,6 +118,8 @@ ShoppingPlanner.initSearchBox = function () {
         ShoppingPlanner.current_lat = place.geometry.location.lat();
         ShoppingPlanner.current_lng = place.geometry.location.lng();
         ShoppingPlanner.addHomeMarker();
+        ShoppingPlanner.current_address = place.formatted_address;
+        $('#current_location').text(ShoppingPlanner.current_address);
     });
 }
 
