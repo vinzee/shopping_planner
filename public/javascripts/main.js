@@ -66,3 +66,7 @@ ShoppingPlanner.showError = function (msg) {
         type: 'warning'
     }).show();
 }
+
+$("go_to_current_location_button").click(function(){
+    ShoppingPlanner.setCurrentLocation();
+})
