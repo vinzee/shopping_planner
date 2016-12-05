@@ -26,15 +26,15 @@
         <div class="row" id='page_container'>
             <div class="col-xs-3 well" id="left-panel">
                 <form class="form form-inline" id="search_box">
-                    
+
                     <input id="pac-input" class="controls hidden" type="text" placeholder="Search Box"><br>
                     <div width="100%">
-                        <button class="btn btn-link" id="go_to_current_location_button" data-toggle="tooltip" title="Home"><img src="images/home.png" width="20"/></button>
+                        <a href="#" class="btn btn-link" id="go_to_current_location_button" data-toggle="tooltip" title="Home"><img src="images/home.png" width="20"/></a>
                         <label class="form-label text-center" id="current_location" data-toggle="tooltip" data-placement="right" title="Current Location"></label><br><br>
                     </div>
                     <b data-toggle="tooltip" data-placement="right" title="Search Radius">Radius </b>
-                    <span id="radius">10</span> miles
-                    <input type="range" data-slider-min="2" data-slider-max="50" data-slider-value="10" data-slider-step="2" id="radius_slider"/><br><br>
+                    <span id="radius">50</span> miles
+                    <input type="range" data-slider-min="50" data-slider-max="50000" data-slider-value="50" data-slider-step="50" id="radius_slider"/><br><br>
                     <b>Categories</b><br>
                     <select id="subcategory"></select><br><br>
                     <button type="button" class="btn btn-primary btn-block" id="get_direction_button"> Get Directions </button><br>
