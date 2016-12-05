@@ -8,7 +8,7 @@ var fields = {
 	name: { type: String, required: true },
 	type: { type: String, required: true },
 	category: { type: String, required: true },
-	subcategory: { type: String, required: true },
+	subcategory: { type: String, required: true, index: true },
 	coordinates: { type: [Number], index: '2dsphere', required: true },
 	city: { type: String, required: true },
 	country: { type: String, required: true },
