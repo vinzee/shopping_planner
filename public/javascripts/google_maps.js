@@ -15,6 +15,7 @@ ShoppingPlanner.initMap = function () {
     ShoppingPlanner.initHomeIcon();
     ShoppingPlanner.initSearchBox();
     ShoppingPlanner.markers = [];
+    ShoppingPlanner.labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // ShoppingPlanner.initForm();
 
     setTimeout(function(){
@@ -53,8 +54,9 @@ ShoppingPlanner.calculateAndDisplayRoute = function (data) {
             ShoppingPlanner.deleteAllMarkers();
 
             ShoppingPlanner.addHomeMarker();
-            _.each(data, function(tuple){
-                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coordinate[0], tuple.coordinate[1]), tuple.name, tuple.address);
+
+            _.each(data, function(tuple, i){
+                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coordinate[0], tuple.coordinate[1]), ShoppingPlanner.labels[i % data.length], tuple.name, tuple.address);
             });
 
             var route = response.routes[0];
@@ -126,7 +128,7 @@ ShoppingPlanner.initSearchBox = function () {
 ShoppingPlanner.addHomeMarker = function (title, content) {
     ShoppingPlanner.deleteAllMarkers();
     var location = new google.maps.LatLng(ShoppingPlanner.current_lat, ShoppingPlanner.current_lng)
-    ShoppingPlanner.addMarker(location, 'My home', ShoppingPlanner.current_address, ShoppingPlanner.homeIcon);
+    ShoppingPlanner.addMarker(location, '', 'My home', ShoppingPlanner.current_address, ShoppingPlanner.homeIcon);
 }
 
 ShoppingPlanner.deleteAllMarkers = function(){
@@ -135,14 +137,16 @@ ShoppingPlanner.deleteAllMarkers = function(){
     });
 }
 
-ShoppingPlanner.addMarker = function (location, title, content, icon) {
+ShoppingPlanner.addMarker = function (location, label, title, content, icon) {
     content = _.isEmpty(content) ? '' : content;
+    label = _.isEmpty(label) ? '' : label;
 
     var marker = new google.maps.Marker({
         map: ShoppingPlanner.map,
         icon: icon,
         title: title,
-        position: location
+        position: location,
+        label: label
     });
 
     var final_content = '<div id="content">'+
