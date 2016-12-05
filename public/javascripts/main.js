@@ -26,6 +26,7 @@ $(document).ready(function () {
     });
 
     $("#get_direction_button").click(function () {
+
         var data = {};
         data.product_types = $("#subcategory").select2('val');
         data.radius = $('#radius_slider').val();
@@ -46,7 +47,9 @@ $(document).ready(function () {
             success: function (result) {
                 console.log("Ajax Success - ");
                 console.log(result);
-                ShoppingPlanner.calculateAndDisplayRoute(result);
+                ShoppingPlanner.dist = result.dist / 1000;
+                $("#totalDist").text("Total Distance : " + ShoppingPlanner.dist + " km").removeClass('hidden');
+                ShoppingPlanner.calculateAndDisplayRoute(result.path);
             },
             error: function (a, b, c) {
                 console.error("Ajax Error - ", a.responseJSON);
@@ -57,6 +60,17 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    $("#totalDist").on('click', function(){
+        if($("#totalDist").hasClass('km')){
+            $("#totalDist").removeClass('km').addClass('miles').text("Total Distance : " + ((ShoppingPlanner.dist/1.60934).toFixed(2)) + " miles");
+        }
+        else if($("#totalDist").hasClass('miles')){
+            $("#totalDist").removeClass('miles').addClass('km').text("Total Distance : " + (ShoppingPlanner.dist) + " km");
+        }{
+
+        }
     });
 
     $("#go_to_current_location_button").click(function(e){
