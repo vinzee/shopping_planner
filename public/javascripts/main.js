@@ -44,9 +44,14 @@ $(document).ready(function () {
             url: "/get_shortest_path",
             data: data,
             success: function (result) {
-                console.log("Ajax Success - ");
-                console.log(result);
-                ShoppingPlanner.calculateAndDisplayRoute(result);
+                console.log("Ajax Success - ", result);
+                ShoppingPlanner.calculateAndDisplayRoute(result.path);
+
+                if(_.isArray(result.err) && result.err.length > 0){
+                    _.each(result.err, function(err){
+                        ShoppingPlanner.showError(err);
+                    })
+                }
             },
             error: function (a, b, c) {
                 console.error("Ajax Error - ", a.responseJSON);
