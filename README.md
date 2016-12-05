@@ -55,6 +55,7 @@ yo mongoose:schema "product|name:String,type:String"
 * Webstorm - https://www.jetbrains.com/webstorm/download/
 
 ### Important Links -
+* geoNear in aggregation - https://docs.mongodb.com/v3.0/reference/operator/aggregation/geoNear
 * mongo Geonear radius - https://docs.mongodb.com/v3.2/reference/command/geoNear/
 * Select2 - https://select2.github.io/examples.html
 * Geolib - https://www.npmjs.com/package/geolib
