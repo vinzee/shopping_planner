@@ -20,7 +20,7 @@ router.post('/get_shortest_path', function(req, res, next) {
 
 	if(!_.isNaN(req.body.lng) && !_.isNaN(req.body.lat) && !_.isNaN(req.body.radius) && req.body['product_types[]'].length > 0){
 		ClosestRouteCalculator.find(req.body.lat, req.body.lng, req.body.radius, req.body['product_types[]'], function(data){
-			if (!_.isEmpty(data.err)) {
+			if (_.isEmpty(data.path)) {
 				res.status(404).json(data.err);
 		    } else {
 				res.status(200).json(data);
