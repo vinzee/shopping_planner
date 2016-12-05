@@ -61,8 +61,12 @@ $(document).ready(function () {
 });
 
 ShoppingPlanner.showError = function (msg) {
-    $('.top-left').notify({
+    $('.bottom-left').notify({
         message: {text: msg},
         type: 'warning'
     }).show();
 }
+
+$("go_to_current_location_button").click(function(){
+    ShoppingPlanner.setCurrentLocation();
+})
