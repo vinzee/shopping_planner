@@ -25,16 +25,15 @@
         <div class='notifications bottom-left'></div>
         <div class="row" id='page_container'>
             <div class="col-xs-3 well" id="left-panel">
+                <h3 style="padding-left:15px">Shopping Planner</h3>
                 <form class="form form-inline" id="search_box">
-
                     <input id="pac-input" class="controls hidden" type="text" placeholder="Search Box"><br>
                     <div width="100%">
-                        <a href="#" class="btn btn-link" id="go_to_current_location_button" data-toggle="tooltip" title="Home"><img src="images/home.png" width="20"/></a>
                         <label class="form-label text-center" id="current_location" data-toggle="tooltip" data-placement="right" title="Current Location"></label><br><br>
                     </div>
                     <b data-toggle="tooltip" data-placement="right" title="Search Radius">Radius </b>
-                    <span id="radius">10</span> miles
-                    <input type="range" data-slider-min="10" data-slider-max="100" data-slider-value="10" data-slider-step="10" id="radius_slider"/><br><br>
+                    <span id="radius">2</span> miles
+                    <input type="range" data-slider-min="2" data-slider-max="10" data-slider-value="2" data-slider-step="2" id="radius_slider"/><br><br>
                     <b>Categories</b><br>
                     <select id="subcategory"></select><br><br>
 
@@ -51,6 +50,16 @@
                 </form>
             </div>
             <div class="col-xs-9">
+                <div id="floating-panel">
+                    <a href="#" class="btn btn-link" id="go_to_current_location_button" data-toggle="tooltip" title="Go Home" data-placement="left"><img src="images/home.png" width="20"/></a>
+                    <b>Mode of Travel: </b>
+                    <select id="mode">
+                      <option value="DRIVING">Driving</option>
+                      <option value="WALKING">Walking</option>
+                      <option value="BICYCLING">Bicycling</option>
+                      <!-- <option value="TRANSIT">Transit</option> -->
+                    </select>
+                </div>
                 <div id="map"></div>
             </div>
         </div> <!-- row -->

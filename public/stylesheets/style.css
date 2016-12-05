@@ -82,3 +82,29 @@ html, body {
 	font-size: 16px;
 	text-align: center;
 }
+#floating-panel {
+	position: absolute;
+	top: 10px;
+	left: 75%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	text-align: center;
+	font-family: 'Roboto','sans-serif';
+	line-height: 20px;
+	padding-left: 5px;
+	/*border: 0.5px solid #999;*/
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+}
+#go_to_current_location_button {
+	padding: 0px;
+/*	position: absolute;
+	left: 68%;
+	z-index: 5;
+	zoom: 1.5;
+*/}

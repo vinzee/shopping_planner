@@ -16,7 +16,13 @@ ShoppingPlanner.initMap = function () {
     ShoppingPlanner.initSearchBox();
     ShoppingPlanner.markers = [];
     ShoppingPlanner.labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    document.getElementById('mode').addEventListener('change', function() {
+      if(!_.isEmpty(ShoppingPlanner.current_waypoints)){
+          ShoppingPlanner.calculateAndDisplayRoute();
+      }
+    });
     // ShoppingPlanner.initForm();
+
 
     setTimeout(function(){
         $('#pac-input').removeClass('hidden');
@@ -37,17 +43,16 @@ ShoppingPlanner.setCurrentLocation = function () {
     }
 }
 
-ShoppingPlanner.calculateAndDisplayRoute = function (data) {
-    var waypts = _.map(data, function (tuple) {
+ShoppingPlanner.calculateAndDisplayRoute = function () {
+    var waypts = _.map(ShoppingPlanner.current_waypoints, function (tuple) {
         return {location: tuple.coordinate[0] + "," + tuple.coordinate[1], stopover: true};
     });
-
     ShoppingPlanner.directionsService.route({
         origin: ShoppingPlanner.current_lat + "," + ShoppingPlanner.current_lng,
         destination: ShoppingPlanner.current_lat + "," + ShoppingPlanner.current_lng,
         waypoints: waypts,
         optimizeWaypoints: true,
-        travelMode: 'DRIVING'
+        travelMode: google.maps.TravelMode[$('#mode').val()]
     }, function (response, status) {
         if (status === 'OK') {
             ShoppingPlanner.directionsDisplay.setDirections(response);
@@ -55,8 +60,8 @@ ShoppingPlanner.calculateAndDisplayRoute = function (data) {
 
             ShoppingPlanner.addHomeMarker();
 
-            _.each(data, function(tuple, i){
-                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coordinate[0], tuple.coordinate[1]), ShoppingPlanner.labels[i % data.length], tuple.name, tuple.address);
+            _.each(ShoppingPlanner.current_waypoints, function(tuple, i){
+                ShoppingPlanner.addMarker(new google.maps.LatLng(tuple.coordinate[0], tuple.coordinate[1]), ShoppingPlanner.labels[i % ShoppingPlanner.current_waypoints.length], tuple.name, tuple.address);
             });
 
             var route = response.routes[0];
@@ -72,7 +77,7 @@ ShoppingPlanner.calculateAndDisplayRoute = function (data) {
             $('#directionsModalButton').removeClass('hidden'); // .html(summaryPanel_html)
         } else {
             ShoppingPlanner.showError('Failed to load Directions.');
-            console.error('Directions request failed due to ' + status);
+            console.error('Directions request failed due to ',response, status);
         }
     });
 }
